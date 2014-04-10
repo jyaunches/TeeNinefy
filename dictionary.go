@@ -1,8 +1,7 @@
 package main
 
 import (	
-	"strings"
-	// "fmt"
+	"strings"	
 )
 
 type Dictionary struct {
