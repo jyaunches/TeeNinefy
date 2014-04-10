@@ -10,3 +10,13 @@ func TestDictionaryFindsWordsBasedOnFirstLetter(t *testing.T) {
     	t.Errorf("fail")    	
     }
 }
+
+func TestDictionaryReturnsEmptyResultsIfNoWordsFound(t *testing.T) {
+    mock_words := []string{"apple", "pear"}
+    d := NewDictionary(mock_words)
+    results := d.search_number("d")
+
+    if len(results) != 0 {
+    	t.Errorf("fail")    
+    }    
+}

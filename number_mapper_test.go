@@ -17,3 +17,12 @@ func TestNumberMapperMapsNumberToLetter(t *testing.T) {
     	}
     }
 }
+
+func TestNumberMapperReturnsEmptyArrayIfNumberNotFound(t *testing.T) {
+    mapper := NewNumberMapper()
+    characters := mapper.map_number("88")
+
+    if len(characters) != 0 {
+    	t.Errorf("fail")    
+    }
+}
