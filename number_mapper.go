@@ -1,7 +1,6 @@
 package main
 
 import(
-	"fmt"
 )
 
 type NumberMapper struct {
@@ -26,8 +25,7 @@ func NewNumberMapper() *NumberMapper {
 func (d *NumberMapper) map_number(numbers_entered string) []string {	
 	var letter_combinations []string
 
-    for i, digit := range numbers_entered{
-    	fmt.Println(i)
+    for _, digit := range numbers_entered{
     	if(len(letter_combinations) == 0){
     		letter_combinations = d.build_combinations("", digit)
 		}else{
