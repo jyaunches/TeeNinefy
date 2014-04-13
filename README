@@ -1,0 +1,48 @@
+TeeNinefy
+
+This project is a stab at getting more familair with the Go Programming Language. It's a simple program that is run from the command line. The idea is as follows.
+
+PROBLEM OVERVIEW
+
+In the early days of text messaging, we did not have screens that showed us keyboards to type into. We had to make due with a keyboard displaying the numbers 0-9. Our prehistoric phones would then attempt to tranlate our number input into words and give us 1 or more suggestions for each number combination we entered.
+
+  1    2    3
+      abc  def
+  4    5    6
+ ghi  jkl  mno
+  7    8    9
+ pqrs tuv  wxyz
+ 	   0
+
+To type dog, you would enter 364. To type home, you would enter 4663. 	   
+
+This program will take an input of numbers and make word suggestions (based on it's limited dictionary, more in this below)
+
+NOTE: 1s represent punctuation input and 0s represent spaces. For simplicity sake, in this program they will be ignored.
+
+HOW YOU RUN IT
+
+A built binary is included in this repository. You can run this from the command line and provide your input as an argument.
+
+Examples:
+
+> ./t9 2462
+[biocenology biocenose biocenoses biocenosis biocenotic cinchonization cinchonizations cinchonized cinchonizes cinchonizing]
+> ./t9 24624664
+[cinchonization cinchonizations cinchonized cinchonizes cinchonizing]
+
+Unit tests can be run with:
+
+> go test
+
+APPROACH
+
+My approach in solving this was to break the problem into 3 parts.
+
+File reading (importing the dictionary content from text files)
+Number parsing (convert a series of numbers into potential character combinations)
+Dictionary lookup (look up words that start with each potential character combination)
+
+In the source, you can find 3 files representing logic for each of these. They have been TDDed and their associated tests can be found in the same directory. The tests should outline what's expected of their behavior (including edgecases).
+
+Things are hooked together in main. This is also where the command line arguments are read.
