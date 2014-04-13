@@ -1,6 +1,7 @@
 package main
 
 import(
+	"strings"
 )
 
 type NumberMapper struct {
@@ -9,8 +10,6 @@ type NumberMapper struct {
 
 func NewNumberMapper() *NumberMapper {	
 	return &NumberMapper{number_map : map[rune][]string{
-			'0': {},
-		    '1': {},
 		    '2': {"a", "b", "c"},
 		    '3': {"d", "e", "f"},
 		    '4': {"g", "h", "i"},
@@ -23,6 +22,9 @@ func NewNumberMapper() *NumberMapper {
 }
 
 func (d *NumberMapper) map_number(numbers_entered string) []string {	
+	r := strings.NewReplacer("0", "", "1", "")
+	numbers_entered = r.Replace(numbers_entered)
+
 	var letter_combinations []string
 
     for _, digit := range numbers_entered{

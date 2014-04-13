@@ -86,3 +86,12 @@ func TestNumberMapperMapsThreeNumbersToLetterPossibilities(t *testing.T) {
 	}
 }
 
+func TestNumberMapperStripsInputOfOnesAndZeros(t *testing.T) {
+    mapper := NewNumberMapper()
+    characters := mapper.map_number("71400")
+
+    if len(characters) != 12{
+    	t.Errorf("Should only have combinations for 7 and 4.. got %d results", len(characters))
+    }
+}
+
