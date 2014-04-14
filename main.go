@@ -14,13 +14,12 @@ func main() {
     return
   }
 
-  filepath.Walk("dictionary_sources", visitDictionarySource)  
-  
+  filepath.Walk("dictionary_sources", visitDictionarySource)    
   mapper := NewNumberMapper()
-    
-  input := os.Args[1]  
-  characters := mapper.mapNumber(input)  
-  results := dictionary.search(characters)   	
+     
+  characters := mapper.mapNumber(os.Args[1])  
+  results := dictionary.search(characters)
+  fmt.Println("Results:")    	
   fmt.Println(results) 
 }
 

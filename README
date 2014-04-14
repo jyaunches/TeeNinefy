@@ -46,3 +46,7 @@ Dictionary lookup (look up words that start with each potential character combin
 In the source, you can find 3 files representing logic for each of these. They have been TDDed and their associated tests can be found in the same directory. The tests should outline what's expected of their behavior (including edgecases).
 
 Things are hooked together in main. This is also where the command line arguments are read.
+
+THE DICTIONARY
+
+The source of the dictionary's words can be manipulated between runs. In the root of the project you will see 2 directories. The 'dictionary_sources' directory is the what is read into the program to be the source of the words that are searched. The 'scowl_dictionary' contains many more source files for english words. You can copy files from here into 'dictionary_sources' between runs.
