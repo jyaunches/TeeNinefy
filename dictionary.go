@@ -1,15 +1,11 @@
 package main
 
-import (	
+import (
 	"strings"	
 )
 
 type Dictionary struct {
 	words []string
-}
-
-func NewDictionary(sourceWords []string) *Dictionary {	
-	return &Dictionary{words : sourceWords}
 }
 
 func (d *Dictionary) search(searchItems []string) []string {
@@ -30,4 +26,8 @@ func (d *Dictionary) getWordsFor(searchItem string) []string {
 		}
 	}
 	return results
+}
+
+func (d *Dictionary) addWords(newWords []string) {
+	d.words = append(d.words, newWords...)
 }
