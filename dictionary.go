@@ -8,24 +8,24 @@ type Dictionary struct {
 	words []string
 }
 
-func NewDictionary(source_words []string) *Dictionary {	
-	return &Dictionary{words : source_words}
+func NewDictionary(sourceWords []string) *Dictionary {	
+	return &Dictionary{words : sourceWords}
 }
 
-func (d *Dictionary) search(search_items []string) []string {
+func (d *Dictionary) search(searchItems []string) []string {
 	var results []string
 
-	for j:= 0; j < len(search_items); j++ {
-		results = append(results, d.get_words_for(search_items[j])...)			
+	for j:= 0; j < len(searchItems); j++ {
+		results = append(results, d.getWordsFor(searchItems[j])...)			
 	}
 
 	return results
 }
 
-func (d *Dictionary) get_words_for(search_item string) []string {
+func (d *Dictionary) getWordsFor(searchItem string) []string {
 	var results []string
 	for i := 0; i < len(d.words); i++ {		
-		if strings.Index(d.words[i], search_item) == 0 {
+		if strings.Index(d.words[i], searchItem) == 0 {
 			results = append(results, d.words[i])			
 		}
 	}

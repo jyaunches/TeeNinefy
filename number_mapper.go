@@ -1,3 +1,9 @@
+// The responsibility of NumberMapper is:
+// #1 - to hold the number to character values
+// #2 - given a string of numbers to map to all the potential 
+// character combinations a word can start with and return that 
+// as an array
+
 package main
 
 import(
@@ -5,11 +11,11 @@ import(
 )
 
 type NumberMapper struct {
-	number_map map[rune][]string
+	numberMap map[rune][]string
 }
 
 func NewNumberMapper() *NumberMapper {	
-	return &NumberMapper{number_map : map[rune][]string{
+	return &NumberMapper{numberMap : map[rune][]string{
 		    '2': {"a", "b", "c"},
 		    '3': {"d", "e", "f"},
 		    '4': {"g", "h", "i"},
@@ -21,32 +27,32 @@ func NewNumberMapper() *NumberMapper {
 	}}
 }
 
-func (d *NumberMapper) map_number(numbers_entered string) []string {	
+func (d *NumberMapper) mapNumber(numbersEntered string) []string {	
 	r := strings.NewReplacer("0", "", "1", "")
-	numbers_entered = r.Replace(numbers_entered)
+	numbersEntered = r.Replace(numbersEntered)
 
-	var letter_combinations []string
+	var letterCombinations []string
 
-    for _, digit := range numbers_entered{
-    	if(len(letter_combinations) == 0){
-    		letter_combinations = d.build_combinations("", digit)
+    for _, digit := range numbersEntered{
+    	if(len(letterCombinations) == 0){
+    		letterCombinations = d.buildCombinations("", digit)
 		}else{
-			var next_combinations []string
-			for i := 0; i < len(letter_combinations); i++ {	
-				next_combinations = append(next_combinations, d.build_combinations(letter_combinations[i], digit)...)
+			var nextCombinations []string
+			for i := 0; i < len(letterCombinations); i++ {	
+				nextCombinations = append(nextCombinations, d.buildCombinations(letterCombinations[i], digit)...)
 			}
-			letter_combinations = next_combinations			
+			letterCombinations = nextCombinations			
 		}
     }
-    return letter_combinations
+    return letterCombinations
 }
 
-func (d *NumberMapper) build_combinations(base string, next_number rune) []string {	
-	next_letters := d.number_map[next_number]
+func (d *NumberMapper) buildCombinations(base string, nextNumber rune) []string {	
+	nextLetters := d.numberMap[nextNumber]
 
-	results := make([]string, len(next_letters)) 
-	for i := 0; i < len(next_letters); i++ {	
-    	results[i] = base + next_letters[i]
+	results := make([]string, len(nextLetters)) 
+	for i := 0; i < len(nextLetters); i++ {	
+    	results[i] = base + nextLetters[i]
     }
 	return results
 }

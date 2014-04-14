@@ -3,8 +3,8 @@ package main
 import "testing"
 
 func TestDictionaryFindsWordsBasedOnFirstLetter(t *testing.T) {
-    mock_words := []string{"apple", "pear"}
-    d := NewDictionary(mock_words)
+    mockWords := []string{"apple", "pear"}
+    d := NewDictionary(mockWords)
     results := d.search([]string{"p", "q"})
     if results == nil || results[0] != "pear"{
     	t.Errorf("fail")    	
@@ -12,8 +12,8 @@ func TestDictionaryFindsWordsBasedOnFirstLetter(t *testing.T) {
 }
 
 func TestDictionaryFindsWordsBasedOnFirstTwoLetters(t *testing.T) {
-    mock_words := []string{"gone", "after", "pear"}
-    d := NewDictionary(mock_words)
+    mockWords := []string{"gone", "after", "pear"}
+    d := NewDictionary(mockWords)
     results := d.search([]string{"af", "ad"})
     if len(results) != 1{
     	t.Errorf("should have 1 result")    	
@@ -25,8 +25,8 @@ func TestDictionaryFindsWordsBasedOnFirstTwoLetters(t *testing.T) {
 }
 
 func TestDictionaryFindsConsecutiveWordsForSameSearchString(t *testing.T) {
-    mock_words := []string{"gone", "after", "afore", "pear"}
-    d := NewDictionary(mock_words)
+    mockWords := []string{"gone", "after", "afore", "pear"}
+    d := NewDictionary(mockWords)
     results := d.search([]string{"af", "ad"})
     if len(results) != 2{
     	t.Errorf("should have 2 results")    	
@@ -38,8 +38,8 @@ func TestDictionaryFindsConsecutiveWordsForSameSearchString(t *testing.T) {
 }
 
 func TestDictionaryReturnsEmptyResultsIfNoWordsFound(t *testing.T) {
-    mock_words := []string{"apple", "pear"}
-    d := NewDictionary(mock_words)
+    mockWords := []string{"apple", "pear"}
+    d := NewDictionary(mockWords)
     results := d.search([]string{"d"})
 
     if len(results) != 0 {
