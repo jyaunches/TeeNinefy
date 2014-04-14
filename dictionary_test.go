@@ -4,7 +4,9 @@ import "testing"
 
 func TestDictionaryFindsWordsBasedOnFirstLetter(t *testing.T) {
     mockWords := []string{"apple", "pear"}
-    d := NewDictionary(mockWords)
+	var d Dictionary
+    d.addWords(mockWords)
+
     results := d.search([]string{"p", "q"})
     if results == nil || results[0] != "pear"{
     	t.Errorf("fail")    	
@@ -13,7 +15,9 @@ func TestDictionaryFindsWordsBasedOnFirstLetter(t *testing.T) {
 
 func TestDictionaryFindsWordsBasedOnFirstTwoLetters(t *testing.T) {
     mockWords := []string{"gone", "after", "pear"}
-    d := NewDictionary(mockWords)
+	var d Dictionary
+    d.addWords(mockWords)
+
     results := d.search([]string{"af", "ad"})
     if len(results) != 1{
     	t.Errorf("should have 1 result")    	
@@ -26,7 +30,9 @@ func TestDictionaryFindsWordsBasedOnFirstTwoLetters(t *testing.T) {
 
 func TestDictionaryFindsConsecutiveWordsForSameSearchString(t *testing.T) {
     mockWords := []string{"gone", "after", "afore", "pear"}
-    d := NewDictionary(mockWords)
+	var d Dictionary
+    d.addWords(mockWords)
+
     results := d.search([]string{"af", "ad"})
     if len(results) != 2{
     	t.Errorf("should have 2 results")    	
@@ -39,10 +45,29 @@ func TestDictionaryFindsConsecutiveWordsForSameSearchString(t *testing.T) {
 
 func TestDictionaryReturnsEmptyResultsIfNoWordsFound(t *testing.T) {
     mockWords := []string{"apple", "pear"}
-    d := NewDictionary(mockWords)
+	var d Dictionary
+    d.addWords(mockWords)
+
     results := d.search([]string{"d"})
 
     if len(results) != 0 {
-    	t.Errorf("fail")    
+    	t.Errorf("should have 0 results")    
+    }    
+}
+
+func TestAddWordsAugmentsExistingSourceWords(t *testing.T) {
+    mockWords := []string{"apple", "pear"}
+    moreMockWords := []string{"orange", "grape"}
+	var d Dictionary
+    d.addWords(mockWords)
+    d.addWords(moreMockWords)
+
+    results := d.search([]string{"gr"})
+
+    if len(results) != 1 {
+    	t.Errorf("should have 1 result")    
+    }    
+    if results[0] != "grape" {
+    	t.Errorf("result should be grape")    
     }    
 }
