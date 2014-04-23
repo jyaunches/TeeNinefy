@@ -6,7 +6,16 @@ import (
   "path/filepath"
 )
 
-var dictionary Dictionary
+var input string
+var dictionary map[string][]string
+var letterMapper *LetterMapper
+
+type Processing func(string) 
+
+func ProcessLine(line string) {
+  lineAsNumber := letterMapper.mapWord(line)
+  dictionary[lineAsNumber] = append(dictionary[lineAsNumber], line)        
+}
 
 func main() {
   if len(os.Args) < 2 {
@@ -14,18 +23,18 @@ func main() {
     return
   }
 
+  letterMapper = NewLetterMapper()  
+  dictionary = make(map[string][]string)
+
+  input = os.Args[1]
   filepath.Walk("dictionary_sources", visitDictionarySource)    
-  mapper := NewNumberMapper()
-     
-  characters := mapper.mapNumber(os.Args[1])  
-  results := dictionary.search(characters)
-  fmt.Println("Results:")    	
-  fmt.Println(results) 
+  fmt.Printf("Result: ")
+  fmt.Printf(dictionary[input][0])
+  fmt.Printf("\n")
 }
 
 func visitDictionarySource(path string, f os.FileInfo, err error) error {
-  lines := readFile(path)
-  dictionary.addWords(lines)
+  readFile(path, ProcessLine)  
   return err
 }
 
