@@ -1,10 +1,9 @@
 package main
 
 import (
-  "fmt"
   "os"
   "path/filepath"
-)
+  )
 
 var input string
 var dictionary map[string][]string
@@ -17,20 +16,20 @@ func ProcessLine(line string) {
   dictionary[lineAsNumber] = append(dictionary[lineAsNumber], line)        
 }
 
-func main() {
-  if len(os.Args) < 2 {
-    fmt.Printf("Please provide your input! Ex. 4663 -> home\n")
-    return
-  }
-
+func main() {    
   letterMapper = NewLetterMapper()  
   dictionary = make(map[string][]string)
-
-  input = os.Args[1]
   filepath.Walk("dictionary_sources", visitDictionarySource)    
-  fmt.Printf("Result: ")
-  fmt.Printf(dictionary[input][0])
-  fmt.Printf("\n")
+
+  printGreeting()
+
+  input := getUserInput()
+
+  for ; ((input != "Done") && (input != "done")); {    
+    printResult(dictionary[input][0])
+    input = getUserInput()
+  }  
+  printGoodbye()  
 }
 
 func visitDictionarySource(path string, f os.FileInfo, err error) error {

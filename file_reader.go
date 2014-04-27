@@ -4,7 +4,6 @@ import (
   "bufio"
   "os"
   "log"
-  // "fmt"
 )
 
 func readFile(path string, processLine Processing)  {
