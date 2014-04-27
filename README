@@ -22,14 +22,24 @@ NOTE: 1s represent punctuation input and 0s represent spaces. For simplicity sak
 
 HOW YOU RUN IT
 
-A built binary is included in this repository. You can run this from the command line and provide your input as an argument.
+A built binary is included in this repository. Run this from the command line. The program will prompt you for input as you go
 
-Examples:
+	Example Interaction:
 
-> ./t9 2462
-[biocenology biocenose biocenoses biocenosis biocenotic cinchonization cinchonizations cinchonized cinchonizes cinchonizing]
-> ./t9 24624664
-[cinchonization cinchonizations cinchonized cinchonizes cinchonizing]
+	-------------------------------------------------------------
+	Welcome to the amazing T9 simulator program.
+	Enter any series of numbers and I will find you word matches.
+	Enter 'Done' when you are finished!
+
+	Enter your numbers:439
+	Results: gey
+
+	Enter your numbers:37673
+	Results: erose
+
+	Enter your numbers:done
+	Thanks! Goodbye.
+
 
 Unit tests can be run with:
 
@@ -37,13 +47,16 @@ Unit tests can be run with:
 
 APPROACH
 
-My approach in solving this was to break the problem into 3 parts.
+My approach in solving this was to break the problem into 4 parts.
 
-File reading (importing the dictionary content from text files)
-Number parsing (convert a series of numbers into potential character combinations)
-Dictionary lookup (look up words that start with each potential character combination)
-
-In the source, you can find 3 files representing logic for each of these. They have been TDDed and their associated tests can be found in the same directory. The tests should outline what's expected of their behavior (including edgecases).
+File reading 
+	Importing the dictionary content from text files
+Word parsing 
+	Convert a word into it's appropriate series of numbers, this is then stored as a map of number to word
+I/O 
+	Retrieve input from user and print results
+Dictionary lookup
+	The user's input, if results are present, should be a key value for the dictionary. The values that key maps to are the words displayed to the user.)
 
 Things are hooked together in main. This is also where the command line arguments are read.
 
