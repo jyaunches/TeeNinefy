@@ -10,12 +10,11 @@ func printGreeting() {
 	fmt.Println("-------------------------------------------------------------")
 	fmt.Println("Welcome to the amazing T9 simulator program.") 
 	fmt.Println("Enter any series of numbers and I will find you word matches.")
-	fmt.Println("Enter 'Done' when you are finished!")
 	fmt.Println("")	
 }
 
 func getUserInput() string{
-  fmt.Printf("Enter your numbers:")
+  fmt.Printf("Type your numbers (or 'done'):")
   var input string	
 	_, err := fmt.Scanf("%s", &input)
   if err !=nil {
@@ -24,9 +23,15 @@ func getUserInput() string{
   return input
 }
 
-func printResult(result string){
-	fmt.Printf("Results: ")
-  	fmt.Printf(result)
+func printResult(results []string){
+	if len(results) == 0{
+		fmt.Printf("No results found!")
+	}else{
+		fmt.Printf("Results: ")
+		for i := range results {
+        	fmt.Printf("%s ", results[i])
+		}				
+	}  	
 	fmt.Println("\n")  
 }
 

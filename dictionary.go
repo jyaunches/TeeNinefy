@@ -15,8 +15,8 @@ func NewDictionary() *Dictionary {
 	return dictionary
 }
 
-func (d *Dictionary) lookUp(input string) string{
-	return d.words[input][0]
+func (d *Dictionary) lookUp(input string) []string{
+	return d.words[input]
 }
 
 type Processing func(string) 

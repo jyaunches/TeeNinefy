@@ -4,40 +4,23 @@ import(
     "testing"
 )
 
-func TestFileReadingFromValidInputReturnsSameNumberEntriesAsFile(t *testing.T) {    
-	letterMapper = NewLetterMapper()  	
-	dictionary = make(map[string][]string)
-    readFile("test_input.txt", ProcessLine)
+var linesAdded []string
 
-    if(len(dictionary) != 3){
-        t.Errorf("map size should be 3 was: ", len(dictionary))        
-    }      
+func processWordMock(line string) {
+	linesAdded = append(linesAdded, line)	  
 }
 
-func TestFileReadingFromValidInputNumberRepMappedToWord(t *testing.T) {    
-	letterMapper = NewLetterMapper()  	
-	dictionary = make(map[string][]string)
-    readFile("test_input.txt", ProcessLine)
+func TestDirectoryReadingProcessesUsingProcessor(t *testing.T) {
+	fileReader := NewFileReader(processWordMock)
 
-    if(dictionary["27753"][0] != "apple"){
-        t.Errorf("should have apple in mapping")        
-    }      
+	if len(linesAdded) != 0{
+        t.Errorf("linesAdded should be 0 before starting")        
+	}
+
+	fileReader.processDirectory("test_input")
+	
+	if len(linesAdded) != 5{
+        t.Errorf("linesAdded should be 5 after processing")        
+	}
 }
 
-func TestFileReadingShouldHandleWordsThatMapToSameNumber(t *testing.T) {    
-	letterMapper = NewLetterMapper()  	
-	dictionary = make(map[string][]string)
-    readFile("test_input.txt", ProcessLine)
-
-    if((dictionary["2337"][0] != "beer") || (dictionary["2337"][1] != "bees")){
-        t.Errorf("should support words with same number mapping")        
-    }      
-}
-
-// func TestFileReadingFromEmptyFile(t *testing.T) {    
-//     wordArray := readFile("empty_input.txt")
-
-//     if wordArray != nil {
-//         t.Errorf("fail")        
-//     }    
-// }
